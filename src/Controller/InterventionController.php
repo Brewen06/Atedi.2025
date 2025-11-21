@@ -80,7 +80,7 @@ class InterventionController extends AbstractController
             $intervention->setTotalPrice($totalPrice);
             $em->persist($intervention);
 
-            //dump("1) Réponse de dolibarr " . (string) $intervention);
+            dump("1) Réponse de dolibarr", $intervention);
 
             $em->flush();
 
@@ -98,7 +98,8 @@ class InterventionController extends AbstractController
     #[Route("/{id}", name: "intervention_show", methods: ["GET","POST"])]
     public function show(Request $request, Intervention $intervention, EntityManagerInterface $em, SoftwareRepository $sr, ActionRepository $ar, SoftwareInterventionReportRepository $sirr, BillingLineRepository $blr): Response
     {
-        // $em = $em;
+        
+        //$em = $em;
         $theStatus = $intervention->getStatus();
 
         if ($request->request->has('status')) {
@@ -111,7 +112,6 @@ class InterventionController extends AbstractController
                         $intervention->getInterventionReport()->setStep(1);
                         $intervention->setStatus($newStatus);
                         $intervention->setReturnDate(null);
-                        //dump("2) Réponse de dolibarr " . (string) $intervention);
                     break;
 
                     case "En cours":
@@ -120,11 +120,10 @@ class InterventionController extends AbstractController
                         if ( $theStatus === "Terminée" ) {
                             $intervention->setReturnDate(null);
                         }
-                        //dump("3) Réponse de dolibarr " . (string) $intervention);
                     break;
 
                     case "Terminée":
-                        if ( $intervention->getInterventionReport()->getStep() == 9 && $intervention->getReturnDate() ) {
+                        if ($intervention->getInterventionReport()->getStep() == 9 && $intervention->getReturnDate() ) {
                             $intervention->setStatus($newStatus);
                             $em->persist($intervention);
                             $em->flush();
@@ -156,7 +155,7 @@ class InterventionController extends AbstractController
 
                                 // 3) Création de la facture dans Dolibarr
                                 if (count($dolibarrLignesFacture) > 0) {
-                                    /// $this->addFlash('info', "Création de la facture dans Dolibarr...");
+                                    //$this->addFlash('info', "Création de la facture dans Dolibarr...");
                                     $dolibarrFactureId = $this->dolibarrHelper->getDolibarrFactureId($intervention, $dolibarrClientId, $dolibarrLignesFacture);
                                     if (isset($dolibarrFactureId)) {
                                         $this->addFlash('success', "La facture (PROV" . $dolibarrFactureId . ") a été créée dans Dolibarr.");
@@ -172,7 +171,7 @@ class InterventionController extends AbstractController
                             // @todo à remettre
                             //return $this->redirectToRoute('index');
                         }
-                        //dump("4) Réponse de dolibarr " . (string) $intervention);
+                        
                         break;
                 }
 
@@ -187,7 +186,6 @@ class InterventionController extends AbstractController
 
             $em->persist($intervention);
             $em->flush();
-            //dump("5) Réponse de dolibarr " . (string) $intervention);
         }
 
         if ($request->request->has('download')) {
@@ -319,7 +317,7 @@ class InterventionController extends AbstractController
                         break;
             }
         }
-
+        dump("2) Réponse de dolibarr", $intervention);
         return $this->render('intervention/show.html.twig', [
             'intervention' => $intervention,
         ]);
@@ -461,7 +459,7 @@ class InterventionController extends AbstractController
                     $interventionReport->setStep($step+1);
                     $em->persist($interventionReport);
                     $em->flush();
-                    //dump("6) Réponse de dolibarr " . (string) $intervention);
+                    dump("3) Réponse de dolibarr", $intervention);
 
                     return $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
@@ -685,8 +683,8 @@ class InterventionController extends AbstractController
                     $em->persist($intervention);
                     $em->flush();
 
-                    //dump("7) Réponse de dolibarr " . (string) $intervention);
-                    return $this->redirectToRoute('intervention_report', [
+                    dump("4) Réponse de dolibarr", $intervention);
+                     $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
                     ]);
                 }
@@ -704,7 +702,7 @@ class InterventionController extends AbstractController
                     $em->persist($intervention);
                     $em->flush();
 
-                    //dump("8) Réponse de dolibarr " . (string) $intervention);
+                    dump("5) Réponse de dolibarr", $intervention);
                     return $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
                     ]);
@@ -735,7 +733,7 @@ class InterventionController extends AbstractController
             $intervention->setTotalPrice($totalPrice);
             $em->flush();
 
-            //dump("9) Réponse de dolibarr " . (string) $intervention);
+            dump("6) Réponse de dolibarr", $intervention);
             return $this->redirectToRoute('intervention_show', [
                 'id' => $intervention->getId(),
             ]);
@@ -758,7 +756,7 @@ class InterventionController extends AbstractController
                 $em->remove($billingLine);
             }
 
-            //dump("10) Réponse de dolibarr " . (string) $intervention);
+            dump("5) Réponse de dolibarr", $intervention);
             $em->remove($intervention);
             $em->flush();
         }
