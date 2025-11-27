@@ -80,7 +80,7 @@ class InterventionController extends AbstractController
             $intervention->setTotalPrice($totalPrice);
             $em->persist($intervention);
 
-            dump("1) Réponse de dolibarr", $intervention);
+            dump("1. Réponse de dolibarr", $intervention);
 
             $em->flush();
 
@@ -317,7 +317,7 @@ class InterventionController extends AbstractController
                         break;
             }
         }
-        dump("2) Réponse de dolibarr", $intervention);
+        dump("2. Réponse de dolibarr", $intervention);
         return $this->render('intervention/show.html.twig', [
             'intervention' => $intervention,
         ]);
@@ -459,7 +459,7 @@ class InterventionController extends AbstractController
                     $interventionReport->setStep($step+1);
                     $em->persist($interventionReport);
                     $em->flush();
-                    dump("3) Réponse de dolibarr", $intervention);
+                    dump("3. Réponse de dolibarr", $intervention);
 
                     return $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
@@ -683,7 +683,7 @@ class InterventionController extends AbstractController
                     $em->persist($intervention);
                     $em->flush();
 
-                    dump("4) Réponse de dolibarr", $intervention);
+                    dump("4. Réponse de dolibarr", $intervention);
                      $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
                     ]);
@@ -702,7 +702,7 @@ class InterventionController extends AbstractController
                     $em->persist($intervention);
                     $em->flush();
 
-                    dump("5) Réponse de dolibarr", $intervention);
+                    dump("5. Réponse de dolibarr", $intervention);
                     return $this->redirectToRoute('intervention_report', [
                         'id' => $intervention->getId(),
                     ]);
@@ -733,7 +733,7 @@ class InterventionController extends AbstractController
             $intervention->setTotalPrice($totalPrice);
             $em->flush();
 
-            dump("6) Réponse de dolibarr", $intervention);
+            dump("6. Réponse de dolibarr", $intervention);
             return $this->redirectToRoute('intervention_show', [
                 'id' => $intervention->getId(),
             ]);
@@ -756,7 +756,7 @@ class InterventionController extends AbstractController
                 $em->remove($billingLine);
             }
 
-            dump("5) Réponse de dolibarr", $intervention);
+            dump("5. Réponse de dolibarr", $intervention);
             $em->remove($intervention);
             $em->flush();
         }

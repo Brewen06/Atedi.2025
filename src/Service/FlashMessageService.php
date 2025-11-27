@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 final class FlashMessageService
 {
@@ -27,6 +28,8 @@ final class FlashMessageService
 
     private function add(string $type, string $message): void
     {
-        $this->requestStack->getSession()->getFlashBag()->add($type, $message);
+        /** @var FlashBagAwareSessionInterface $session */
+        $session = $this->requestStack->getSession();
+        $session->getFlashBag()->add($type, $message);
     }
 }
