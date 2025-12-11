@@ -6,6 +6,7 @@
 ## Configuration requise 
 
 - PHP 8.4
+- Dolibarr >= 22
 
 
 
@@ -14,6 +15,11 @@
 Open your CMD and copy this line : 
 ```
 git clone https://github.com/ndlaprovidence/Atedi.git
+```
+
+Change branch : 
+```
+git checkout 2025-2026-Symfony-7.4
 ```
 
 
