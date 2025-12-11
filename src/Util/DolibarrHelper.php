@@ -91,7 +91,7 @@ class DolibarrHelper
 
                 // Afficher le code de retour
                 $statusCode = $response->getStatusCode();
-                $this->flashMessageService->addSuccess((string)$statusCode);
+                $this->flashMessageService->addSuccess("Code de retour : " . (string)$statusCode);
 
                 // Afficher le contenu JSON de la réponse
                 $dolibarrClientId = $response->getContent();
@@ -140,8 +140,8 @@ class DolibarrHelper
                 $dolibarrProductId = $content_decode[0]->id;
                 $this->flashMessageService->addSuccess("ID du product = " . $dolibarrProductId);
             } else {
-                $action = 'la création de la tâche dans Dolibarr';
-                $this->flashMessageService->addSuccess("Le product '" . $product_name . "' n'a pas trouvé, ajout du product dans Dolibarr...");
+                $action = 'la création du ' . ($type == 1 ? 'service' : 'produit') . ' dans Dolibarr';
+                $this->flashMessageService->addSuccess("Le " . ($type == 1 ? 'service' : 'produit') . " '" . $product_name . "' n'a pas trouvé, ajout du " . ($type == 1 ? 'service' : 'produit') . " dans Dolibarr...");
 
                 $ref = 'ATEDI-' . str_pad($product->getId(), 3, "0", STR_PAD_LEFT);
                 $barcode = '999' . str_pad($product->getId(), 10, "0", STR_PAD_LEFT);
@@ -170,7 +170,14 @@ class DolibarrHelper
 
                 // Afficher le code de retour
                 $statusCode = $response->getStatusCode();
-                $this->flashMessageService->addSuccess((string)$statusCode);
+                $this->flashMessageService->addSuccess("Code de retour : " . (string)$statusCode);
+
+                // Afficher la requête envoyée à Dolibarr
+                // $this->flashMessageService->addSuccess("Requête envoyée à Dolibarr : " . $this->DOLIBARR_URL . 'api/index.php/products?DOLAPIKEY=' . $this->DOLIBARR_APIKEY);
+
+                // Afficher la réponse complète de Dolibarr
+                // $this->flashMessageService->addSuccess("2) Réponse de Dolibarr '" . print_r($response, true));
+                // dump("2) Réponse de Dolibarr '" . print_r($response, true));
 
                 // Afficher le contenu JSON de la réponse
                 $dolibarrProductId = $response->getContent();
@@ -228,7 +235,7 @@ class DolibarrHelper
 
             // Afficher le code de retour
             $statusCode = $response->getStatusCode();
-            $this->flashMessageService->addSuccess((string)$statusCode);
+            $this->flashMessageService->addSuccess("Code de retour : " . (string)$statusCode);
 
             // Afficher le contenu JSON de la réponse
             $dolibarrFactureId = $response->getContent();

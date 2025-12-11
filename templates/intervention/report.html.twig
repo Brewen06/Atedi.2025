@@ -135,7 +135,11 @@
         {% elseif step == 6 %}
             <div class="row justify-content-around mb-3 report-container">
                 <div class='col-12 justify-content-center row step-title p-2 mb-3'>
+<<<<<<< HEAD
                     <div class='f-20'>Rapport CrystalDisk - Usure batterie</div>
+=======
+                    <div class='f-20'>Rapport CrystalDisk & Usure batterie</div>
+>>>>>>> production
                 </div>
                 <div class="container-background col p-4 content list">
                     <div class="col-auto text-center">État du disk :</div>                    
@@ -272,9 +276,6 @@
                         <hr>
                         <div class='comment p-2'><span class='font-weight-bold'>Sévérité</span> : {{ intervention.interventionReport.severity }}</div>
                         <div class='comment p-2 mt-2'><span class='font-weight-bold'>Analyse interne</span> : {{ intervention.interventionReport.internalAnalysis ?: "<span class='missing-info font-weight-bold'>Pas d'informations sur l'analyse interne</span>"}}</div>
-                        <div class='row mt-2 data-row'>
-                            <div class='col-3'>Virus</div><div class='col-9'>{% if "Virus" in severityProblems %}<i class="fas fa-plus"></i>{% else %}<i class="fas fa-minus"></i>{% endif %}</div>
-                        </div>
                     </div>
 
                     <div class="container-background col mb-auto p-4">
