@@ -103,7 +103,7 @@ class DolibarrHelper
                 $this->flashMessageService->addSuccess("ID du client qui vient d'être créé : " . $dolibarrClientId);
             }
         } catch (\Throwable $th) {
-            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de ' . $action, ['email']);
+            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de ' . $action);
         }
 
         return $dolibarrClientId;
@@ -189,7 +189,7 @@ class DolibarrHelper
                 $this->flashMessageService->addSuccess("ID du product qui vient d'être créé : " . $dolibarrProductId);
             }
         } catch (\Throwable $th) {
-            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de ' . $action, ['email']);
+            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de ' . $action);
         }
         dump(print_r('4) Réponse de Dolibarr : ' . $response, true));
         return $dolibarrProductId;
@@ -245,7 +245,7 @@ class DolibarrHelper
             // Afficher le contenu JSON de la réponse
             $dolibarrFactureId = $response->getContent();
         } catch (\Throwable $th) {
-            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de la création de la facture dans Dolibarr', ['email']);
+            $this->flashMessageService->addSuccess('Une erreur est intervenue lors de la création de la facture dans Dolibarr');
         }
 
         return $dolibarrFactureId;
