@@ -27,6 +27,18 @@ class BookletFixtures extends Fixture
         $data->setTitle('Windows 10');
         $manager->persist($data);
 
+        $data = new Booklet();
+        $data->setTitle('Windows 11');
+        $manager->persist($data);
+
+        $data = new Booklet();
+        $data->setTitle('Linux');
+        $manager->persist($data);
+
+        $data = new Booklet();
+        $data->setTitle('MacOS');
+        $manager->persist($data);
+
         $manager->flush();
     }
 }

@@ -23,6 +23,12 @@ class TechnicianFixtures extends Fixture
         $data->setEmail('yannisgoudal@hotmail.com');
         $manager->persist($data);
 
+        $data = new Technician();
+        $data->setLastName('HOMMET');
+        $data->setFirstName('Gilles');
+        $data->setEmail('');
+        $manager->persist($data);
+
         $manager->flush();
     }
 }

@@ -47,7 +47,7 @@ class SoftwareFixtures extends Fixture
         $manager->persist($data);
 
         $data = new Software();
-        $data->setTitle('Skype');
+        $data->setTitle('Microsoft Teams');
         $data->setType('Installation/Mise à jour');
         $manager->persist($data);
 
@@ -83,21 +83,6 @@ class SoftwareFixtures extends Fixture
 
         $data = new Software();
         $data->setTitle('Opera');
-        $data->setType('Installation/Mise à jour');
-        $manager->persist($data);
-
-        $data = new Software();
-        $data->setTitle('Ninite Win 7');
-        $data->setType('Installation/Mise à jour');
-        $manager->persist($data);
-
-        $data = new Software();
-        $data->setTitle('Ninite Win 8');
-        $data->setType('Installation/Mise à jour');
-        $manager->persist($data);
-
-        $data = new Software();
-        $data->setTitle('Ninite Win 10');
         $data->setType('Installation/Mise à jour');
         $manager->persist($data);
 

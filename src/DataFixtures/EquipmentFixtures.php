@@ -20,6 +20,10 @@ class EquipmentFixtures extends Fixture
         $manager->persist($data);
 
         $data = new Equipment();
+        $data->setTitle('Ordinateur-tablette');
+        $manager->persist($data);
+
+        $data = new Equipment();
         $data->setTitle('Tablette');
         $manager->persist($data);
 

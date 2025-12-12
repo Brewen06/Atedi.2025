@@ -11,8 +11,17 @@ class OperatingSystemFixtures extends Fixture
 {
     public function load(ObjectManager $manager):void
     {
+
+        $data = new OperatingSystem();
+        $data->setTitle('Windows 11');
+        $manager->persist($data);
+
         $data = new OperatingSystem();
         $data->setTitle('Windows 10');
+        $manager->persist($data);
+
+        $data = new OperatingSystem();
+        $data->setTitle('Windows 8');
         $manager->persist($data);
 
         $data = new OperatingSystem();
@@ -20,7 +29,15 @@ class OperatingSystemFixtures extends Fixture
         $manager->persist($data);
 
         $data = new OperatingSystem();
+        $data->setTitle('Windows XP');
+        $manager->persist($data);
+
+        $data = new OperatingSystem();
         $data->setTitle('Linux');
+        $manager->persist($data);
+
+        $data = new OperatingSystem();
+        $data->setTitle('MacOS');
         $manager->persist($data);
 
         $manager->flush();

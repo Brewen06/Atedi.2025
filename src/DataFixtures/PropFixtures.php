@@ -19,6 +19,10 @@ class PropFixtures extends Fixture
         $data->setTitle('Chargeur');
         $manager->persist($data);
 
+        $data = new Prop();
+        $data->setTitle('Aucun accessoire');
+        $manager->persist($data);
+
         $manager->flush();
     }
 }
