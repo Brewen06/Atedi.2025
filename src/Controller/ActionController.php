@@ -66,12 +66,18 @@ class ActionController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "action_delete", methods: ["DELETE"])]
+    #[Route("/{id}", name: "action_delete", methods: ["POST"])]
     public function delete(Request $request, Action $action, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$action->getId(), $request->request->get('_token'))) {
+         $actionId = $action->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $actionId, $request->request->get('_token'))) {
             $em->remove($action);
             $em->flush();
+
+            $this->addFlash('success', "Suppression de l'action n°" . $actionId . " réussie.");
+        } else {
+            $this->addFlash('error', "Échec de la suppression de l'action n°" . $actionId . ".");
         }
 
         return $this->redirectToRoute('action_index');

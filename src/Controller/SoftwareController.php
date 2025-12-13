@@ -66,12 +66,18 @@ class SoftwareController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "software_delete", methods: ["DELETE"])]
+    #[Route("/{id}", name: "software_delete", methods: ["POST"])]
     public function delete(Request $request, Software $software, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$software->getId(), $request->request->get('_token'))) {
+         $softwareId = $software->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $softwareId, $request->request->get('_token'))) {
             $em->remove($software);
             $em->flush();
+
+            $this->addFlash('success', "Suppression du logiciel n°" . $softwareId . " réussie.");
+        } else {
+            $this->addFlash('error', "Échec de la suppression du logiciel n°" . $softwareId . ".");
         }
 
         return $this->redirectToRoute('software_index');

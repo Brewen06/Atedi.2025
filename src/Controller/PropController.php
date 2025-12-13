@@ -80,12 +80,18 @@ class PropController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "prop_delete", methods: ["DELETE"])]
+    #[Route("/{id}", name: "prop_delete", methods: ["POST"])]
     public function delete(Request $request, Prop $prop, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$prop->getId(), $request->request->get('_token'))) {
+         $propId = $prop->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $propId, $request->request->get('_token'))) {
             $em->remove($prop);
             $em->flush();
+
+            $this->addFlash('success', "Suppression du client n°" . $propId . " réussie.");
+        } else {
+            $this->addFlash('error', "Échec de la suppression du client n°" . $propId . ".");
         }
 
         return $this->redirectToRoute('prop_index');

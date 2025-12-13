@@ -66,12 +66,18 @@ class BookletController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "booklet_delete", methods: ["DELETE"])]
+    #[Route("/{id}", name: "booklet_delete", methods: ["POST"])]
     public function delete(Request $request, Booklet $booklet, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$booklet->getId(), $request->request->get('_token'))) {
+         $bookletId = $booklet->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $bookletId, $request->request->get('_token'))) {
             $em->remove($booklet);
             $em->flush();
+
+            $this->addFlash('success', "Suppression du carnet n°" . $bookletId . " réussie.");
+        } else {
+            $this->addFlash('error', "Échec de la suppression du carnet n°" . $bookletId . ".");
         }
 
         return $this->redirectToRoute('booklet_index');

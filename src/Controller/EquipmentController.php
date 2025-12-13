@@ -80,12 +80,18 @@ class EquipmentController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "equipment_delete", methods: ["DELETE"])]
+    #[Route("/{id}", name: "equipment_delete", methods: ["POST"])]
     public function delete(Request $request, Equipment $equipment, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$equipment->getId(), $request->request->get('_token'))) {
+         $equipmentId = $equipment->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $equipmentId, $request->request->get('_token'))) {
             $em->remove($equipment);
             $em->flush();
+
+            $this->addFlash('success', "Suppression de l'équipement n°" . $equipmentId . " réussie.");
+        } else {
+            $this->addFlash('error', "Échec de la suppression de l'équipement n°" . $equipmentId . ".");
         }
 
         return $this->redirectToRoute('equipment_index');
