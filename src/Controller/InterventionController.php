@@ -386,7 +386,7 @@ class InterventionController extends AbstractController
                     if (isset($data['technicians'])) {
                         $techniciansID = $data['technicians'];
                         for ($i = 0; $i < count($techniciansID); $i++) {
-                            $technician = $tr->findOneById($techniciansID[$i]);
+                            $technician = $tr->find($techniciansID[$i]);
                             $interventionReport->addTechnician($technician);
                             $em->persist($interventionReport);
                         }
@@ -422,19 +422,7 @@ class InterventionController extends AbstractController
                     if (isset($data['cleaning-software'])) {
                         $cleaningSoftwaresID = $data['cleaning-software'];
                         for ($i = 0; $i < count($cleaningSoftwaresID); $i++) {
-                            $software = $sr->findOneById($cleaningSoftwaresID[$i]);
-                            $softwareOperation = new SoftwareInterventionReport();
-                            $softwareOperation->setSoftware($software);
-                            $softwareOperation->setInterventionReport($interventionReport);
-                            $softwareOperation->setAction('Nettoyage');
-                            $em->persist($softwareOperation);
-                        }
-                    }
-
-                    if ($request->request->has('cleaning-software')) {
-                        $cleaningSoftwares = $request->request->all('cleaning-software');
-                        foreach ( $cleaningSoftwares as $softwareId ) {
-                            $software = $sr->findOneById($softwareId);
+                            $software = $sr->find($cleaningSoftwaresID[$i]);
                             $softwareOperation = new SoftwareInterventionReport();
                             $softwareOperation->setSoftware($software);
                             $softwareOperation->setInterventionReport($interventionReport);
@@ -479,7 +467,7 @@ class InterventionController extends AbstractController
                     if (isset($data['actions'])) {
                         $actionsID = $data['actions'];
                         for ($i = 0; $i < count($actionsID); $i++) {
-                            $action = $ar->findOneById($actionsID[$i]);
+                            $action = $ar->find($actionsID[$i]);
                             $interventionReport->addAction($action);
                             $em->persist($interventionReport);
                         }
@@ -488,7 +476,7 @@ class InterventionController extends AbstractController
                     if ($request->request->has('actions')) {
                         $actions = $request->request->all   ('actions');
                         foreach ( $actions as $action ) {
-                            $action = $ar->findOneById($action);
+                            $action = $ar->find($action);
                             $interventionReport->addAction($action);
                             $em->persist($interventionReport);
                         }
@@ -533,7 +521,7 @@ class InterventionController extends AbstractController
                         $softwareId = $parameter[1];
                         $action = $parametersList[$parametersKeys[$i]];
 
-                        $software = $sr->findOneById($softwareId);
+                        $software = $sr->find($softwareId);
                         $softwareOperation = new SoftwareInterventionReport();
                         $softwareOperation->setSoftware($software);
                         $softwareOperation->setInterventionReport($interventionReport);
@@ -624,7 +612,7 @@ class InterventionController extends AbstractController
                     if (isset($data['booklets'])) {
                         $bookletsID = $data['booklets'];
                         for ($i = 0; $i < count($bookletsID); $i++) {
-                            $booklet = $br->findOneById($bookletsID[$i]);
+                            $booklet = $br->find($bookletsID[$i]);
                             $interventionReport->addBooklet($booklet);
                             $em->persist($interventionReport);
                         }
@@ -633,7 +621,7 @@ class InterventionController extends AbstractController
                     if ($request->request->has('booklets')) {
                         $booklets = $request->request->all('booklets');
                         foreach ( $booklets as $booklet ) {
-                            $booklet = $br->findOneById($booklet);
+                            $booklet = $br->find($booklet);
                             $interventionReport->addBooklet($booklet);
                             $em->persist($interventionReport);
                         }
@@ -673,7 +661,7 @@ class InterventionController extends AbstractController
                 if ($request->request->has('delete-billing-line')) {
                     $billingLineId = $request->request->get('billing-line-id');
 
-                    $billingLine = $blr->findOneById($billingLineId);
+                    $billingLine = $blr->find($billingLineId);
                     $intervention->removeBillingLine($billingLine);
 
                     $totalPrice = $this->atediHelper->strTotalPrice($intervention);

@@ -185,10 +185,12 @@
 								<span class="font-weight-bold">Logiciel de nettoyage utilisé(s) :</span>
 							</td>
 							<td width="67%" class='py-1 border-on px-2'>
-								{% for software in cleaningSoftwares %}
-									{% if software.title in intervention.interventionReport.softwareInterventionReports %}
+								{% set displayed_softwares = [] %}
+								{% for software in intervention.interventionReport.softwareInterventionReports %}
+									{% if software.action == "Nettoyage" and software.software.id not in displayed_softwares %}
 										<div>
-											{{ software.title }}</div>
+											{{ software.software.title }}</div>
+										{% set displayed_softwares = displayed_softwares|merge([software.software.id]) %}
 									{% endif %}
 								{% endfor %}
 							</td>
