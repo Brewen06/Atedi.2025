@@ -551,9 +551,10 @@ class InterventionController extends AbstractController
                         $interventionReport->setWindowsInstall($windowsInstalls);
                     }
 
-                    if ($request->request->has('windows-version')) {
-                        $windowsVersion = $request->request->get('windows-version');
-                        $interventionReport->setWindowsVersion($windowsVersion);
+                    if ($request->request->has('windows-version-manual') && !empty($request->request->get('windows-version-manual'))) {
+                        $interventionReport->setWindowsVersion($request->request->get('windows-version-manual'));
+                    } elseif ($request->request->has('windows-version-selected')) {
+                        $interventionReport->setWindowsVersion($request->request->get('windows-version-selected'));
                     }
 
                     $interventionReport->setStep($step + 1);

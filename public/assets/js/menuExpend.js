@@ -18,6 +18,7 @@ $( document ).ready(function() {
     $('#windowsVersionCheckbox').change( function(){
         if ($(".more-content").is(":visible") ) {
             $("#windowsVersionInput").val('');
+            $('input[name="windows-version-selected"]').prop('checked', false);
         }
         $('.more-content').slideToggle(300);
     });
