@@ -316,7 +316,7 @@ class InterventionController extends AbstractController
                     break;
             }
         }
-        dump("2. Réponse de dolibarr", $intervention);
+        
         return $this->render('intervention/show.html.twig', [
             'intervention' => $intervention,
         ]);
