@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier l'equipement{% endblock %}
+{% block title %}Modifier l'équipement{% endblock %}
 
 {% block body %}
     <a href="{{ path('equipment_show', {'id': equipment.id}) }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
-    <h2 class='text-center mb-5 font-weight-bold'>Modifier l'equipement</h2>
+    <h2 class='text-center mb-5 font-weight-bold'>Modifier l'équipement</h2>
 
     {{ include('equipment/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+ 
 {% endblock %}
