@@ -441,6 +441,11 @@ class InterventionController extends AbstractController
                         $interventionReport->setInternalAnalysis($internalAnalysis);
                     }
 
+                    if ($request->request->has('infection-count')) {
+                        $infectionCount = $request->request->get('infection-count');
+                        $interventionReport->setInfectionCount($infectionCount ? (int)$infectionCount : null);
+                    }
+
                     $severity = $request->request->get('severity');
                     $interventionReport->setSeverity($severity);
                     $interventionReport->setStep($step + 1);

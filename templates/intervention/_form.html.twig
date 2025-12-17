@@ -66,7 +66,14 @@
                 </div>
 
                 <div class="row mb-3">
-                            <h5>Accessoire(s) Manquant(s)</h5>            
+                            <div class="d-flex align-items-center mb-2">
+                        {% if app.request.attributes.get('_route') != 'intervention_edit' %}
+                            <a href="{{ path('prop_new', {'s': 'intervention'}) }}" class="mr-2">
+                                <i class="fas add-btn fa-plus-circle fa-lg"></i>
+                            </a>
+                        {% endif %}
+                        <h5 class="mb-0">Accessoire(s) Manquant(s)</h5>
+                    </div>      
                             {{ form_errors(form.props) }}
                             {{ form_widget(form.props, {'attr': {'class': 'form-control'}}) }}
 

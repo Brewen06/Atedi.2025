@@ -20,7 +20,7 @@ class PropFixtures extends Fixture
         $manager->persist($data);
 
         $data = new Prop();
-        $data->setTitle('Aucun accessoire');
+        $data->setTitle('Aucun accessoire manquant');
         $manager->persist($data);
 
         $manager->flush();
