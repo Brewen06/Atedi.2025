@@ -61,7 +61,7 @@
                     <div class='more-content'>
                         <h5>Analyse interne <span class='h6 font-italic'>(facultatif)<span></h5>
                         <input class='w-100 mb-3 p-2' type="text" id="internalAnalysis" name="internal-analysis">
-                        <input class='w-100 mb-3 p-2' type="text" id="infectionCount" name="infection-count" placeholder="Nombre d'infections">
+                        <input class='w-100 mb-3 p-2' type="number" id="infectionCount" name="infection-count" placeholder="Nombre d'infections" min="0" step="1">
                         <input class='w-100 mb-3 p-2' type="text" id="searchBar" placeholder="Rechercher un logiciel">
                         {% for software in softwares %}
                             <div class='data-row row'>
@@ -158,11 +158,11 @@
                     <br>
                     <div>
                         <div>
-                            Heure(s) de Fonctionnement : <input class='w-100' id="uptimeInput" name="uptime" type="text" placeholder="Heure(s)">
+                            Heure(s) de Fonctionnement : <input class='w-100' id="uptimeInput" name="uptime" type="number" placeholder="Heure(s)">
                         </div>
                         <br>
                         <div>
-                            Taux d'usure de la batterie : <input class='w-100' id="batteryDegradationInput" name="battery-degradation" type="text" placeholder="Taux">
+                            Taux d'usure de la batterie : <input class='w-100' id="batteryDegradationInput" name="battery-degradation" type="number" placeholder="Taux">
                         </div>
                         <div>
                             
