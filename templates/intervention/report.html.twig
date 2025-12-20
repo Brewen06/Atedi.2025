@@ -120,21 +120,11 @@
                     <div class='f-20'>Sous-partie Windows</div>
                 </div>
                 <div class="container-background col p-4 content list">
-                {% if isWindows(intervention.operatingSystem.title) == true %}
+                 {% if isWindows(intervention.operatingSystem.title) == true %}
                     <div class='row justify-content-center text-center my-auto'>
                         <div class="col-auto d-flex flex-column">
                             <div><input class='mr-2' id="windowsVersionCheckbox" type="checkbox" name="windows-install[]" value="Installation de(s) mise(s) à jour Windows" />Installation de(s) mise(s) à jour Windows</div>
-                            <div class='more-content' id="windowsVersionContainer">
-                                <div class="row justify-content-center mb-2">
-                                    {% set versions = ['24H2', '23H2', '22H2', '21H2', '21H1', '20H2', '2004', '1909', '1903', '1809'] %}
-                                    {% for version in versions %}
-                                        <div class="col-auto">
-                                            <input type="radio" name="windows-version-selected" value="{{ version }}"> {{ version }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <input class='w-100' id="windowsVersionInput" name="windows-version-manual" type="text" placeholder="Autre version (manuel)">
-                            </div>
+                            <div class='more-content' id="windowsVersionContainer"><input class='w-100' id="windowsVersionInput" name="windows-version" type="text" placeholder="Numéro de(s) version(s)"></div>
                         </div>
                         <div class="col-auto"><input class='mr-2' type="checkbox" name="windows-install[]" value="Activation Windows" />Activation Windows</div>
                     </div>
@@ -372,6 +362,9 @@
                             {% for install in installs %}
                                 <div class='data-row col-12'>{{ install }}</div>
                             {% endfor %}
+                            {% if intervention.interventionReport.windowsVersion %}
+                                <div class='data-row col-12 font-italic'>Version : {{ intervention.interventionReport.windowsVersion }}</div>
+                            {% endif %}
                         {% elseif isWindows(intervention.operatingSystem.title) == true %}
                             <div class='col-12 text-center mx-auto missing-info font-weight-bold'>Le matériel n'a pas reçu d'installations windows</div>
                         {% else %}
