@@ -72,10 +72,13 @@ class ActionController extends AbstractController
          $actionId = $action->getId();
 
         if ($this->isCsrfTokenValid('delete' . $actionId, $request->request->get('_token'))) {
-            $em->remove($action);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression de l'action n°" . $actionId . " réussie.");
+            try {
+                $em->remove($action);
+                $em->flush();
+                $this->addFlash('success', "Suppression de l'action n°" . $actionId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer cette action car elle est liée à une ou plusieurs interventions.");
+            }
         } else {
             $this->addFlash('error', "Échec de la suppression de l'action n°" . $actionId . ".");
         }

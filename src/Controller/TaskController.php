@@ -107,12 +107,15 @@ class TaskController extends AbstractController
          $taskId = $task->getId();
 
         if ($this->isCsrfTokenValid('delete' . $taskId, $request->request->get('_token'))) {
-            $em->remove($task);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression du client n°" . $taskId . " réussie.");
+            try {
+                $em->remove($task);
+                $em->flush();
+                $this->addFlash('success', "Suppression de la tâche n°" . $taskId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer cette tâche car elle est liée à une ou plusieurs interventions.");
+            }
         } else {
-            $this->addFlash('error', "Échec de la suppression du client n°" . $taskId . ".");
+            $this->addFlash('error', "Échec de la suppression de la tâche n°" . $taskId . ".");
         }
 
         return $this->redirectToRoute('task_index');

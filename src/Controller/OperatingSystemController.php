@@ -86,10 +86,13 @@ class OperatingSystemController extends AbstractController
         $operatingSystemId = $operatingSystem->getId();
 
         if ($this->isCsrfTokenValid('delete' . $operatingSystemId, $request->request->get('_token'))) {
-            $em->remove($operatingSystem);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression du système d'exploitation n°" . $operatingSystemId . " réussie.");
+            try {
+                $em->remove($operatingSystem);
+                $em->flush();
+                $this->addFlash('success', "Suppression du système d'exploitation n°" . $operatingSystemId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer ce système d'exploitation car il est lié à une ou plusieurs interventions.");
+            }
         } else {
             $this->addFlash('error', "Échec de la suppression du système d'exploitation n°" . $operatingSystemId . ".");
         }

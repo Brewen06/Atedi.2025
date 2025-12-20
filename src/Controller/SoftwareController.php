@@ -72,10 +72,13 @@ class SoftwareController extends AbstractController
          $softwareId = $software->getId();
 
         if ($this->isCsrfTokenValid('delete' . $softwareId, $request->request->get('_token'))) {
-            $em->remove($software);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression du logiciel n°" . $softwareId . " réussie.");
+            try {
+                $em->remove($software);
+                $em->flush();
+                $this->addFlash('success', "Suppression du logiciel n°" . $softwareId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer ce logiciel car il est lié à une ou plusieurs interventions.");
+            }
         } else {
             $this->addFlash('error', "Échec de la suppression du logiciel n°" . $softwareId . ".");
         }

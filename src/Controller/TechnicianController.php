@@ -89,10 +89,13 @@ class TechnicianController extends AbstractController
          $technicianId = $technician->getId();
 
         if ($this->isCsrfTokenValid('delete' . $technicianId, $request->request->get('_token'))) {
-            $em->remove($technician);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression du technicien n°" . $technicianId . " réussie.");
+            try {
+                $em->remove($technician);
+                $em->flush();
+                $this->addFlash('success', "Suppression du technicien n°" . $technicianId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer ce technicien car il est lié à une ou plusieurs interventions.");
+            }
         } else {
             $this->addFlash('error', "Échec de la suppression du technicien n°" . $technicianId . ".");
         }
