@@ -3,6 +3,7 @@
 {% block title %}Gestion du système d'exploitation{% endblock %}
 
 {% block body %}
+<a href="{{ path('operating_system_index') }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
     <div class='text-center'>
         <div class='h2 mb-3 font-weight-bold'>Gestion du système d'exploitation</div>
         <a class="grey-btn f-20 px-4 py-2" href="{{ path('operating_system_edit', {'id': operating_system.id}) }}">Modifier</a>

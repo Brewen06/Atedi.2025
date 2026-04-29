@@ -11,12 +11,15 @@
 
 
 {% block body %}
+<a href="{{ path('intervention_index') }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
 	<div class='text-center'>
 		<div class='h2 mb-3 font-weight-bold'>Gestion de la demande d'intervention n°{{ intervention.id }}</div>
-		<a class="grey-btn f-20 px-4 py-2" href="{{ path('intervention_edit', {'id': intervention.id}) }}">Modifier</a>
+		<a class="grey-btn f-20 px-4 py-2" href="{{ path('intervention_edit', {'id': intervention.id}) }}"><i class="fas fa-edit mr-3"></i>Modifier</a>
 		{{ include('intervention/_delete_form.html.twig') }}
 		<form action="" method="post" class="d-inline-block">
-			<button type='submit' name='download' value='request' class='green-btn f-20 px-4 py-2'>Télécharger</button>
+			<button type='submit' name='download' value='request' class='green-btn f-20 px-4 py-2'>
+				<i class="fas fa-download mr-3 my-auto"></i>Télécharger
+			</button>
 		</form>
 	</div>
 	<hr>
@@ -150,7 +153,7 @@
 			<hr>
 			<div class='row'>
 				<div class='col text-center'>
-					<a class="w-100 p-2 more-infos" data-toggle="collapse" href="#moreInfos" aria-expanded="false">Plus d'informations<i class="ml-2 fas fa-chevron-up more-infos-chevron"></i>
+					<a class="w-100 p-2 more-infos" data-toggle="collapse" href="#moreInfos" aria-expanded="false">Plus d'informations<i class="ml-2 fas fa-chevron-down more-infos-chevron"></i>
 					</a>
 					<hr>
 				</div>

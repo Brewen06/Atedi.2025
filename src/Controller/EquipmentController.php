@@ -86,10 +86,13 @@ class EquipmentController extends AbstractController
          $equipmentId = $equipment->getId();
 
         if ($this->isCsrfTokenValid('delete' . $equipmentId, $request->request->get('_token'))) {
-            $em->remove($equipment);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression de l'équipement n°" . $equipmentId . " réussie.");
+            try {
+                $em->remove($equipment);
+                $em->flush();
+                $this->addFlash('success', "Suppression de l'équipement n°" . $equipmentId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer cet équipement car il est lié à une ou plusieurs interventions.");
+            }
         } else {
             $this->addFlash('error', "Échec de la suppression de l'équipement n°" . $equipmentId . ".");
         }

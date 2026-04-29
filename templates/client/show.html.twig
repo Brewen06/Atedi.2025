@@ -3,6 +3,7 @@
 {% block title %}Gestion de la fiche client{% endblock %}
 
 {% block body %}
+<a href="{{ path('client_index') }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
     <div class='text-center'>
         <div class='h2 mb-3 font-weight-bold'>Gestion de la fiche client</div>
         <a class="grey-btn f-20 px-4 py-2" href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>

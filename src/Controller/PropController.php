@@ -75,7 +75,7 @@ class PropController extends AbstractController
         }
 
         return $this->render('prop/edit.html.twig', [
-            'prop' => $prop,
+            'toto' => $prop,
             'form' => $form->createView(),
         ]);
     }
@@ -86,12 +86,15 @@ class PropController extends AbstractController
          $propId = $prop->getId();
 
         if ($this->isCsrfTokenValid('delete' . $propId, $request->request->get('_token'))) {
-            $em->remove($prop);
-            $em->flush();
-
-            $this->addFlash('success', "Suppression du client n°" . $propId . " réussie.");
+            try {
+                $em->remove($prop);
+                $em->flush();
+                $this->addFlash('success', "Suppression de l'accessoire n°" . $propId . " réussie.");
+            } catch (\Exception $e) {
+                $this->addFlash('error', "Impossible de supprimer cet accessoire car il est lié à une ou plusieurs interventions.");
+            }
         } else {
-            $this->addFlash('error', "Échec de la suppression du client n°" . $propId . ".");
+            $this->addFlash('error', "Échec de la suppression de l'accessoire n°" . $propId . ".");
         }
 
         return $this->redirectToRoute('prop_index');

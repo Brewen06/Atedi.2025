@@ -203,6 +203,14 @@
 									{{ intervention.interventionReport.internalAnalysis }}</td>
 							{% endif %}
 						</tr>
+						<tr>
+							{% if intervention.interventionReport.infectionCount is not null %}
+								<td class='mb-5 border-on px-2' colspan="2">
+									<span class='font-weight-bold'>Nombre d'infections :
+									</span>
+									{{ intervention.interventionReport.infectionCount }}</td>
+							{% endif %}
+						</tr>
 					</tbody>
 				</table>
 			</div>

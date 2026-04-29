@@ -3,9 +3,10 @@
 {% block title %}Gestion de l'equipement{% endblock %}
 
 {% block body %}
+<a href="{{ path('equipment_index') }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
     <div class='text-center'>
         <div class='h2 mb-3 font-weight-bold'>Gestion de l'équipement</div>
-        <a class="grey-btn f-20 px-4 py-2" href="{{ path('equipment_edit', {'id': equipment.id}) }}">Modifier</a>
+        <a class="grey-btn f-20 px-4 py-2 d-inline-block" href="{{ path('equipment_edit', {'id': equipment.id}) }}"><i class="fas fa-edit mr-3"></i>Modifier</a>
         {{ include('equipment/_delete_form.html.twig') }}
     </div>
     <hr>
@@ -13,7 +14,7 @@
     <div class="container show-container">
         <div class="row justify-content-around">
             <div class="container-background col-md-auto mb-auto mr-5 p-4">
-                <div class='f-20 text-center font-weight-bold'>L'equipement</div>
+                <div class='f-20 text-center font-weight-bold'>L'équipement</div>
                 <hr>
                 <div class='row mb-2'>
                     <div class='col-md-auto my-auto'><i class="fas fa-desktop"></i></div>
@@ -44,7 +45,7 @@
                         </a>
                     {% else %}
                         <div class="row">
-                            <div class='col text-center p-2'>Aucunes interventions concernant cet equipement enregistrées</div>
+                            <div class='col text-center p-2'>Aucunes interventions concernant cet équipement enregistrées</div>
                         </div>
                     {% endfor %}
                 <div>

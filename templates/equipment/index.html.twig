@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des equipements{% endblock %}
+{% block title %}Liste des équipements{% endblock %}
 
 {% block javascripts %}        
     <script src="{{ asset('assets/js/searchBar.js') }}"></script>
 {% endblock %}
 
 {% block body %}
+    <a href="{{ path('index') }}"><i class="fas fa-chevron-left h1 float-left"></i></a>
     <div class='text-center mb-2'>	
-        <div class='h2 mb-3 font-weight-bold'>Liste des equipements</div>
+        <div class='h2 mb-3 font-weight-bold'>Liste des équipements</div>
     </div>
     <div class='text-center mb-2'>	
-        <a href='{{ path('equipment_new') }}'><input type='button' value="Ajouter un equipement" class='grey-btn f-20 py-2 px-4' /></a>
+        <a href='{{ path('equipment_new') }}'><input type='button' value="Ajouter un équipement" class='grey-btn f-20 py-2 px-4' /></a>
     </div>
 
     <hr>
 
-    <input class='w-100 mb-3 p-2' type="text" id="searchBar" placeholder="Rechercher un equipement">
+    <input class='w-100 mb-3 p-2' type="text" id="searchBar" placeholder="Rechercher un équipement">
 
     <div class='container list'>
         <div class="row tab-head p-2">
@@ -31,7 +32,7 @@
             </a>
         {% else %}
             <div class="row">
-                <div class='col text-center alert-label p-2'>Aucun equipements enregistrés</div>
+                <div class='col text-center alert-label p-2'>Aucun équipements enregistrés</div>
             </div>
         {% endfor %}
         

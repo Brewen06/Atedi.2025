@@ -66,6 +66,9 @@ class InterventionReport
     #[ORM\Column(type: "integer", length: 11, nullable: true)]
     private $battery_degradation;
 
+    #[ORM\Column(type: "integer", nullable: true)]
+    private ?int $infection_count = null;
+
     public function __construct()
     {
         $this->booklets = new ArrayCollection();
@@ -321,6 +324,18 @@ class InterventionReport
     public function setBatteryDegradation(?string $battery_degradation): self
     {
         $this->battery_degradation = $battery_degradation;
+
+        return $this;
+    }
+
+    public function getInfectionCount(): ?int
+    {
+        return $this->infection_count;
+    }
+
+    public function setInfectionCount(?int $infection_count): self
+    {
+        $this->infection_count = $infection_count;
 
         return $this;
     }
